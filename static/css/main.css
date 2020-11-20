@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.info-page p {
+    line-height: 50px;
+}
+
+.code {
+    margin: 30px 0;
+    background-color: #fff;
+    width: 900px;
+}
+
+.code pre {
+    color: #000;
+}
+
+.text-task {
+    background-color: #fff;
+    color: #000;
+    margin: 30px 0;
+    width: 900px;
+}
+
+.date {
+    margin-bottom: 30px;
+}
+
+.date-example {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    margin-right: 30px;
+}
+
+.date-btn {
+    background-color:transparent;
+    border-radius:28px;
+    border:1px solid #fff;
+    display:inline-block;
+    cursor:pointer;
+    color:#fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size:18px;
+    padding:16px 60px;
+    text-decoration:none;
+    margin-bottom: 20px;
+}
+
+.log {
+    border: 1px solid #fff;
+    border-radius: 40px;
+    padding: 5px 10px;
+    color: white;
+}
+
+.regin {
+    border: 1px solid #fff;
+    border-radius: 40px;
+    padding: 5px 10px;
+    color: white;
+}
+
+.rigging {
+    margin: 30px 0;
+}
+
+.rigging a {
+    margin-right: 20px;
+}
+
+.example {
+    margin-left: 30px;
+}

@@ -1,0 +1,9 @@
+{% load i18n %}
+{% load account %}
+{% load static %}
+{% block static %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% user_display user as user_display %}
+<p class="steer"><strong>{% trans "Note" %}:</strong> {% blocktrans %}you are already logged in as {{ user_display }}.{% endblocktrans %}</p>

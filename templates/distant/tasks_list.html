@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+{% if user.style.style %}
+  <link rel="stylesheet" href="{% static 'css/main_sun.css' %}">
+{% else %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="example">
+  {% if user.is_authenticated %}
+  <div class="tasks">
+    {% for task in tasks %}
+        <div class="task">
+          {% if user.is_staff %}
+          <div class="edittool">
+            <a href="{% url 'update' task.pk %}"><i class="fa fa-scissors" aria-hidden="true"></i></a>
+            <a href="{% url 'delete' task.pk %}"><i class="fa fa-eraser" aria-hidden="true"></i></a>
+          </div> 
+          {% endif %} 
+          <span class="nom">Задание {{ task.num_task }}.<span>
+          <p class="text-task">
+            {{ task.text_task|linebreaksbr }}
+          </p>
+          <div class="code">
+            <pre>{{ task.answer_task }}</pre>
+          </div>
+        </div>
+    {% empty %}
+      <img src="{% static 'images/ustal.png' %}" alt="" class='no-homework'>
+    {% endfor %}
+  </div>
+  {% else %}
+  <h1 class="warning">Чтобы увидеть решения войдите или зарегистрируйтесь</h1>
+  <div class="rigging">
+    <a href="{% url 'account_login' %}" class="log">Войти</a>
+  <a href="{% url 'account_signup' %}" class="regin">Зарегистрироваться</a>
+  </div> 
+{% endif %}
+</section>
+<section class="date-example">
+    {% for date in dates %}
+        <div>
+          {% if request.GET.id == date.id|stringformat:"i" %}
+            <span class="current">{{ date }}</span>
+          {% else %}
+            <a href="?id={{ date.pk }}&page={{ dates.number  }}" class="date-btn">{{ date }}</a>
+          {% endif %}
+        </div>
+    {% endfor %}
+    <div class="pagination">
+      {% if dates.has_previous %}
+          <a href="?id={{ request.GET.id }}&page={{ dates.previous_page_number }}" class="array"><i class="fa fa-caret-square-o-left" aria-hidden="true"></i></a>
+      {% endif %}
+  
+      {% for num in dates.paginator.page_range %}
+          {% if num == dates.number %}
+              <span class="choice"><b>{{ num }}</b></span>
+          {% else %}
+              <a href="?id={{ request.GET.id }}&page={{ num }}"> {{ num }}</a>
+          {% endif %} 
+      {% endfor %}
+  
+      {% if dates.has_next %}
+          <a href="?id={{ request.GET.id }}&page={{ dates.next_page_number }}" class="array"><i class="fa fa-caret-square-o-right" aria-hidden="true"></i></a>
+      {% endif %}
+  
+  </div>
+</section>
+
+{% include 'style.html' %}
+{% endblock %}

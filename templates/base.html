@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	{% if user.style.style %}
+		<link rel="shortcut icon" href="{% static 'images/fox_sun.png' %}?31231312" type="image/x-icon">	
+		<link rel="stylesheet" href="{% static 'css/base_sun.css' %}">
+	{% else %}
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="{% static 'images/fox.png' %}?31231312" type="image/x-icon">	
+		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	{% endif %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	{% block static %}{% endblock %}
+	<title>{% block head_title %}Дистант{% endblock %}</title>
+	{% block extra_head %}{% endblock %}
+</head>
+<body>
+	<header class='header'>
+		<section class="navigation">
+			<div class="nav-container">
+			  <div class="brand">
+				{% if user.style.style %}
+					<a href="{% url 'tasks' %}" class="a-logo"><img src="{% static 'images/fox_sun.png' %}" alt="Логотип" class="logo"></a>
+				{% else %}
+					<a href="{% url 'tasks' %}"><img src="{% static 'images/fox.png' %}" alt="Логотип" class="logo"></a>
+				{% endif %}
+			  </div>
+			  <nav>
+				<div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+				<ul class="nav-list">
+				  <li>
+					<a href="/">Главная</a>
+				  </li>
+				  <li>
+					<a href="http://is.krmt.edu.ru/course/view.php?id=374" target="_blank"">Задания</a>
+				  </li>
+				  {% if user.is_authenticated %}
+				  <li>
+					<a href="#!">Пользователь</a>
+					<ul class="nav-dropdown">
+					  <li>
+						<a href="{% url 'profile' %}"><p><img src="{{ user.profile.avatar.url }}" alt="Фотка" class="user-image"></p> <span class="name">{{ user.first_name }}</span></a>
+					  </li>
+					  <li>
+						<a href="{% url 'account_logout' %}">Выйти</a>
+					  </li>
+					  <li>
+						<a href="{% url 'edit' %}">Редактирование</a>
+					  </li>
+					</ul>
+				  </li>
+				  {% else %}
+				  <li>
+					<a href="#!">Пользователь</a>
+					<ul class="nav-dropdown">
+					  <li>
+						<a href="{% url 'account_login' %}">Войти</a>
+					  </li>
+					  <li>
+						<a href="{% url 'account_signup' %}">Зарегистрироваться</a>
+					  </li>
+					</ul>
+				  </li>
+				  {% endif %}
+				</ul>
+			  </nav>
+			</div>
+		  </section>
+		<!-- <div class="container">
+			<nav>			
+				{% if user.is_authenticated %}
+					<div class="user" id="auth">
+						{% if user.style.style %}
+							<a href="{% url 'tasks' %}" class="a-logo"><img src="{% static 'images/fox_sun.png' %}" alt="Логотип" class="logo"></a>
+						{% else %}
+							<a href="{% url 'tasks' %}"><img src="{% static 'images/fox.png' %}" alt="Логотип" class="logo"></a>
+						{% endif %}
+						<p><img src="{{ user.profile.avatar.url }}" alt="Фотка" class="user-image"></p>
+						<a href="{% url 'account_logout' %}" class="btn">Выйти</a>
+						<a href="{% url 'edit' %}">Редактировать</a>
+						<a href="{% url 'profile' %}">Профиль</a>
+					</div>
+				{% else %}
+					<div class="user" id="auth">
+						<a href="{% url 'tasks' %}"><img src="{% static 'images/fox.png' %}" alt="Логотип" class="logo"></a>
+						<a href="{% url 'account_login' %}" class="login btn" id="auth">Войти</a>
+						<a href="{% url 'account_signup' %}" class="reg btn" id="auth">Зарегистрироваться</a>
+					</div>
+				{% endif %}
+				<div class="user" id="notauth">
+					<a href="{% url 'tasks' %}" class="btn">Главная</a>
+					<a href="http://is.krmt.edu.ru/course/view.php?id=374" target="_blank" class="btn">Задания</a>
+					<a href="{% url 'get_info' %}" class="btn">О сайте</a>	
+				</div>			
+			</nav> 
+		</div> -->
+	</header>
+	<main class='main'>
+		<div class="container">
+			<div class="hero">
+				{% block body %}
+					{% block content %}
+					{% endblock %}
+				{% endblock %}
+
+				{% block extra_body %}
+				{% endblock %}		
+			</div>		
+		</div>	
+		{% if user.is_staff %}
+		<div class="toolbar">
+			<a href="{% url 'users' %}" class="users"><i class="fa fa-user" aria-hidden="true"></i></a>
+			<a href="{% url 'create' %}" class="users"><i class="fa fa-edit" aria-hidden="true"></i></a>
+		</div>
+		{% endif %}
+	</main>
+	<footer class='footer'>
+		<div class="container">
+			<p>&copy;milovanovv1@mail.ru</p>
+			<p>Designed by Albert.</p>
+		</div>
+	</footer>
+	<script src="{% static 'js/jquery.js' %}"></script>
+	{% if user.style.style %} <!-- Скрипт для выпадающего меню -->
+		<script>
+			(function($) { 
+				$(function() { 
+					$('nav ul li a:not(:only-child)').click(function(e) {
+					$(this).siblings('.nav-dropdown').toggle();
+
+					$('.nav-dropdown').not($(this).siblings()).hide();
+					e.stopPropagation();
+					});
+
+					$('html').click(function() {
+					$('.nav-dropdown').hide();
+					});
+
+					$('#nav-toggle').click(function() {
+					$('nav ul').slideToggle();
+					});
+				
+					$('#nav-toggle').on('click', function() {
+					this.classList.toggle('active');
+					});
+				}); 
+			})(jQuery); 
+		</script>
+	{% else %}
+	<!-- Если нужно вставь свой скрипт -->
+	{% endif %}
+	{% block sctipt %}
+	{% endblock %}
+</body>
+</html>

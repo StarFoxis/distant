@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+{% if user.style.style %}
+  <link rel="stylesheet" href="{% static 'css/main_sun.css' %}">
+{% else %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {% for element in form %}
+    <p class="label">{{ element.label_tag }}</p>
+    <p class="data">{{ element }}</p>
+    <br>
+  {% endfor %}
+  <input type="submit" value="Сохранить" class="btn-sd">
+</form>
+{% include 'style.html' %}
+{% endblock %}

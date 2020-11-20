@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+{% if user.style.style %}
+<link rel="stylesheet" href="{% static 'css/profile_sun.css' %}">
+{% else %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="profile profile-block">
+    <h1>Профиль {{ person.last_name }} </h1>
+    <div class="info-user">
+        <div class="image left-block">
+            <img src="{{ person.profile.avatar.url }}" alt="Фотка" class="avatar">
+        </div>
+        <div class="right-block">
+            <p>Логин: {{ person.username }}</p>
+            <p>Имя: {{ person.first_name }}</p>
+            <p>Фамилия: {{ person.last_name }}</p>
+            <p>Email: {{ person.email }}</p>
+            <p>Телефон: {{ profile.phone }}</p>
+            <p class="style-bool">Тема: 
+                {% if person.style.style %}
+                    Светлая
+                {% else %}
+                    Темная
+                {% endif %}
+            </p>
+            <!-- <p>Пароль(хеш): {{ person.password }}</p> -->
+        </div>
+    </div>
+</div>
+{% include 'style.html' %}
+{% endblock %}

@@ -1,0 +1,248 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+input {
+    padding: 7px;
+    border-radius: 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main {
+    flex-direction: column;
+}
+
+.content {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px 5px;
+    margin: 0 30px;
+}
+
+.content button {
+    cursor: pointer;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.hero a {
+    /* color: white; */
+    /* font-size: inherit; */
+}
+
+.social {
+    margin-top: 20px;
+    display: inline-block;
+    border: 1px solid white;
+    border-radius: 40px;
+    background-color: transparent;
+    font-size: 20px;
+    color: #7023c5;
+    font-weight: bold;
+}
+
+.icon {
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+    display: inline-block;
+    font-size: 26px;
+    border-radius: 50%;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+.vk-icon {
+    border: 2px solid #507299;
+    color: #507299;
+}
+
+.vk-icon:hover {
+    background-color:  #507299;
+    color: white;
+} 
+
+.ok-icon {
+    border: 2px solid #ee8208;
+    color: #ee8208;
+}
+
+.ok-icon:hover {
+    background-color:  #ee8208;
+    color: white;
+}
+
+.facebook-icon {
+    border: 2px solid #3578E5;
+    color: #3578E5;
+}
+
+.facebook-icon:hover {
+    background-color:  #3578E5;
+    color: white;
+}
+
+.yandex-icon {
+    border: 2px solid#ff0000;
+    color:#ff0000;
+}
+
+.yandex-icon:hover {
+    background-color:#ff0000;
+    color: white;
+}
+
+.google-icon {
+    border: 2px solid #507299;
+    color: rgb(66 133 244);
+}
+
+.google-icon:hover {
+    border-color: snow;
+    background: rgb(131,58,180);
+    background: linear-gradient(112deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(69,252,93,1) 100%);
+    color: white;
+}
+
+.steer {
+    color: white;
+    font-size: 18px;
+}
+
+.steer a:hover {
+    color: rgb(56, 22, 50);
+    text-decoration: underline;
+}
+
+/* .unit {
+    display: block;
+} */
+
+.label {
+    display: inline-block;
+    color: rgb(174, 39, 192);
+    font-size: 18px;
+    width: 155px;
+    margin: 10px 0;
+    color: white;
+}
+
+.input {
+    display: inline-block;
+}
+
+.errors {
+    display: inline-block;
+}
+
+.errorlist {
+    margin-left: 15px;
+    list-style: hebrew;
+}
+
+.support {
+    display: inline-block;
+    position: relative; /*обязательное параметр*/
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.support em {
+    background: #FF6600;
+    border-radius: 20px;
+    border: 1px solid #999;
+    text-align: center;
+    color: #FFF;
+    font: normal bold 16px Arial;
+    padding: 0 4px;
+}
+
+.tip,
+span.support::before/*если используется атрибут data-title*/ {
+    display: none;
+    position: absolute;
+    z-index: 9998;
+    top: 0;
+    left: 100%;
+    background: rgb(82, 157, 175);
+    text-align: left;
+    color: #802284;
+    cursor: default;
+    padding: 5px;
+    margin: -15px 0 0 10px;
+    width: 200px;
+    min-height: 50px;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 15px;
+    font-size: 17px;
+}
+
+*:focus {
+    outline: none;
+}
+
+a.support:hover .tip {
+    display:block;
+}
+
+/* .secondaryAction {
+    display: inline-block;
+    color: rgb(102, 27, 86);
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.secondaryAction:hover {
+    color: rgb(66, 31, 57);
+} */
+
+button {
+    background-color: transparent;
+    font-size: 18px;
+    padding: 8px 26px;
+    border: 1px solid #fff;
+    border-radius: 40px;
+    color: #fff;
+}
+
+.logining {
+    color: rgb(61, 32, 52);
+    font-size: 18px;
+    text-decoration: none;
+}
+
+/* .login:hover {
+    color: rgb(124, 75, 116);
+} */
+
+.primaryAction {
+    margin-top: 10px;
+}
+
+.secondaryAction {
+    margin-left: 10px;
+    color: white;
+}
+
+.fa {
+    position: relative;
+    top: 8px;
+}
+
+.fa-vk {
+    left: -1px;
+}
+
+.fa-google {
+    right: -1px;
+}
+
+.unit button {
+    margin-top: 10px;
+}

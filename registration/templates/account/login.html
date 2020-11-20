@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load static %}
+{% block static %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="content">
+  <h1>{% trans "Sign In" %}</h1>
+
+  {% get_providers as socialaccount_providers %}
+
+
+  <form class="logining" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {% for l in form %}
+      <div class="unit">
+        <div class="label">{{ l.label_tag }}</div>
+        <div class="input">{{ l }}</div>
+        {% if form.non_field_errors %}
+          <div class="errors">
+            <a class='support' tabindex="1"><em>?</em>
+              <span class='tip'>
+                {{ form.non_field_errors }}
+              </span>
+            </a>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="plug"></div>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    <div class="plug"></div>
+    <div class="social">
+      <a href="{% provider_login_url "vk" %}" class="icon vk-icon"><i class="fa fa-vk" aria-hidden="true"></i></a>
+      <a href="{% provider_login_url "odnoklassniki" %}" class="icon ok-icon"><i class="fa fa-odnoklassniki" aria-hidden="true"></i></a>
+      <a href="{% provider_login_url "facebook" %}" class="icon facebook-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+      <a href="{% provider_login_url "yandex" %}" class="icon yandex-icon"><i class="fa fa-yahoo" aria-hidden="true"></i></a>
+      <a href="{% provider_login_url "google" %}" class="icon google-icon"><i class="fa fa-google" aria-hidden="true"></i></a>
+    </div>
+  </form>
+</div>
+{% endblock %}

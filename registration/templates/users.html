@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+{% if user.style.style %}
+<link rel="stylesheet" href="{% static 'css/profile_sun.css' %}">
+{% else %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="block">
+    <h1>Пользователи</h1>
+    {% for user in object_list %}
+        <p class="person">{{ forloop.revcounter }} пользователь: <a href="{% url 'user-detail' user.pk %}">{{ user }}</a></p>
+    {% endfor %}
+</div>
+{% include 'style.html' %}
+{% endblock %}

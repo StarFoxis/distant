@@ -1,0 +1,122 @@
+.profile {
+    margin: 0 15px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+form p {
+    margin-left: 5px;
+    padding: 2px;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(28, 23, 41);
+}
+
+p label {
+    display: inline-block;
+    min-width: 140px;
+}
+
+.phone {
+    color: rgb(55, 110, 94);
+}
+
+
+.my-input {
+    background-color: transparent; border: transparent; font-size: inherit; color: inherit; border-bottom: 1px solid;
+}
+
+h1 {
+    color: rgb(60, 29, 61);
+}
+
+.push {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: transparent;
+    font-size: 19px;
+    color: rgb(74, 160, 124);
+    transition-duration: 400ms;
+}
+
+.push:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.btn-tertiary{color:rgb(51, 100, 100);padding:0;line-height:40px;width:300px;display:block;border:2px solid #555; transition-duration: 300ms;}
+.btn-tertiary:hover, .btn-tertiary:focus{color:rgb(75, 179, 121);border-color:rgb(72, 192, 152); transition-duration: 300ms;}
+.input-file{width:.1px;height:.1px;opacity:0;overflow:hidden;position:absolute;z-index:-1}
+.input-file + .js-labelFile{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 10px;cursor:pointer}
+.input-file + .js-labelFile .icon:before{content:"\f093"}
+.input-file + .js-labelFile.has-file .icon:before{content:"\f00c";color:#5AAC7B}
+
+form .image {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.avatar {
+    margin: 9px auto;
+    display: flex;
+    max-width: 300px;
+    max-height: 300px;
+    /* border: 1px solid black; */
+    /* border-radius: 50%; */
+    /* justify-content: center; */
+    align-items: center;
+    overflow: hidden;
+}
+
+.avatar img {
+    width: -moz-available;         
+    width: -webkit-fill-available; 
+    width: fill-available;
+    height: -moz-available;         
+    height: -webkit-fill-available; 
+    height: fill-available;
+}
+
+.info-user {
+    display: flex;
+}
+
+.right-block {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.right-block p {
+    padding: 5px;
+    font-size: 18px;
+    color: rgb(57, 155, 114);
+}
+
+a {
+    /* padding: 5px; */
+    font-size: 18px;
+    color: rgb(35, 117, 83);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(32, 87, 48);
+    text-decoration: underline;
+}
+
+.person {
+    font-size: 19px;
+    color: rgb(70, 182, 158);
+    padding: 2px;
+}
+
+.block {
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 2% 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}

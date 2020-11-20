@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+{% if user.style.style %}
+  <link rel="stylesheet" href="{% static 'css/main_sun.css' %}">
+{% else %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="example">
+  {% for date in dates %}
+  <div class="block-task date-{{ date.pk }} disabled">
+    <h1 class="date">{{ date }}</h1>
+      {% if user.is_authenticated %}
+        {% for task in tasks %}
+          {% if task.date.pk == date.pk %}
+          <div class="tasks">
+            <div class="task-{{ task.pk }} task">
+              <span class="nom">Задание {{ task.num_task }}.<span>
+              <p class="text-task">
+                {{ task.text_task|linebreaksbr }}
+              </p>
+              <div class="code">
+                <pre>{{ task.answer_task }}</pre>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <h1 class="warning">Чтобы увидеть решения войдите или зарегистрируйтесь</h1>
+        <div class="rigging">
+          <a href="{% url 'account_login' %}" class="log">Войти</a>
+        <a href="{% url 'account_signup' %}" class="regin">Зарегистрироваться</a>
+        </div> 
+      {% endif %}
+  </div>
+  {% endfor %}
+</section>
+
+<section class="date-example">
+  {% for date in dates %}
+  <div>
+    <button class='date-btn date-{{ date.pk }}'>{{ date }}</button>
+  </div>
+  {% endfor %} 
+</section>
+{% if user.is_authenticated %}
+<div class="style">  
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="{{ user }}">
+        {% if user.style.style %}
+          <button class="btn-style"><i class="fa fa-moon-o" aria-hidden="true"></i></button>
+        {% else %}
+          <button class="btn-style"><i class="fa fa-sun-o" aria-hidden="true"></i></button>
+        {% endif %}
+  </form>
+</div>
+{% endif %}
+{% endblock %}

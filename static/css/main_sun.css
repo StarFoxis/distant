@@ -1,0 +1,247 @@
+
+.date-example .date-btn {
+    margin: 20px auto;
+    border: 0px;
+    background: transparent;
+    display: block;
+    font-size: inherit;
+    color: rgb(150, 125, 197);
+    text-decoration: none;
+    text-align: center;    
+}
+
+.date-example div {
+    color: rgb(150, 125, 197);
+    font-size: 30px;
+    text-align: center;
+}
+
+.date-example .current {
+    display: block;
+    margin: 20px auto;
+    color: rgb(30, 15, 49);
+}
+
+.block-task {
+    border-radius: 20px;
+    margin: 20px;
+    padding: 10px;
+    background-color: rgba(64, 87, 59, 1);
+}
+
+.date {
+    text-align: center;
+    color: blueviolet;
+    font-size: 30px;
+}
+
+.tasks {
+    padding: 5px;
+}
+
+.task {
+    border: 1px solid yellow;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 3px;
+    background-color: teal;
+}
+
+.text-task {
+    border-bottom: 2px solid black;
+}
+
+.code {
+    color: rgb(231, 216, 195);
+}
+
+pre {
+    user-select: all;
+    white-space: pre-wrap;
+    border: 1px solid bisque;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.disabled {
+    display: none;
+}
+
+.date-btn:hover {
+    cursor: pointer;
+    color: rgb(121, 19, 216);
+}
+
+.date-example .active {
+    color: rgb(83, 5, 83);
+}
+
+.footer p {
+    margin: auto;
+    padding-left: 20px;
+}
+
+.no-homework {
+    display: block;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    border-radius: 85px;
+    padding: 35px;
+}
+
+.relaxation {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(92, 30, 92);
+    font-size: inherit;
+}
+
+.relaxation:hover {
+    color: rgb(58, 19, 58);
+}
+
+.info-page {
+    height: 100%;
+    margin: 0 15px;
+    padding: 15px;
+    border: 1px solid silver;
+    border-radius: 20px;
+    text-align: center;
+    background-image: url(/static/images/warning.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom center;
+    background-color: rgba(35, 78, 35, 0.5);
+}
+
+.info-page h1 {
+    font-size: 40px;
+    color: floralwhite;
+    text-align: center;
+}
+
+.info-page p {
+    text-align: left;
+    font-size: 16px;
+    color: rgb(168, 130, 59);
+    border-bottom: 1px solid black;
+}
+
+.warning {
+    font-size: 20px;
+    color: rgb(43, 24, 43);
+}
+
+.log, .reg {
+    margin: 15px;
+    display: inline-block;
+    font-size: 20px;
+    text-decoration: none;
+    color: rgb(54, 22, 53);
+}
+
+.reg {
+    margin-left: 50px;
+}
+
+.log:hover, .reg:hover {
+    color: rgb(153, 43, 175);
+}
+
+.edittool {
+    display: inline;
+    position: relative;
+    top: 0;
+    left: calc(100% - 55px);
+}
+
+.edittool a {
+    position: absolute;
+    color: rgb(60, 187, 128);
+    font-weight: bold;
+    transition-duration: 400ms;
+}
+
+.edittool a:hover {
+    color: rgb(27, 63, 49);
+    transition-duration: 400ms;
+}
+
+.edittool a:first-child {
+    left: 25px;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: rgb(81, 35, 90);
+    font-size: 29px;
+}
+
+.choice {
+    color: pink;
+}
+
+.array {
+    color: rgb(140, 66, 158);
+    transition-duration: 400ms;
+}
+
+.pagination a:hover {
+    color: rgb(111, 89, 117);
+    transition-duration: 400ms;
+}
+
+.label {
+    font-size: 20px;
+    color: rgb(62, 175, 151);
+    display: inline-block;
+    width: 150px;
+    margin: auto;
+}
+
+.data {
+    color: rgb(38, 109, 91) !important;
+    font-size: 18px !important;
+    display: inline-block;
+}
+
+.data textarea {
+    width: 600px;
+    height: 300px;
+}
+
+.btn-sd {
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: transparent;
+    font-size: 19px;
+    color: rgb(74, 160, 124);
+    transition-duration: 400ms;
+}
+
+.btn-sd:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.delete-task {
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 2% 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.delete-task h1 {
+    color: rgb(59, 177, 112);
+    font-size: 30px;
+}
+
+.delete-task p {
+    font-size: 20px;
+    color: rgb(17, 87, 34);
+}
