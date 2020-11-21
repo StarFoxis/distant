@@ -3,7 +3,7 @@
     margin: 20px auto;
     border: 0px;
     background: transparent;
-    display: block;
+    display: inline-block;
     font-size: inherit;
     color: rgb(150, 125, 197);
     text-decoration: none;
@@ -17,7 +17,7 @@
 }
 
 .date-example .current {
-    display: block;
+    /* display: block; */
     margin: 20px auto;
     color: rgb(30, 15, 49);
 }
@@ -244,4 +244,31 @@ pre {
 .delete-task p {
     font-size: 20px;
     color: rgb(17, 87, 34);
+}
+
+.created {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 5%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.errorlist {
+    margin-left: 20px;
+    /* list-style-type: none; */
+    font-size: 20px;
+    color: rgb(51, 172, 67);
+}
+
+
+
+.delete-date {
+    margin-left: 20px;
+    color: darkred;
+    transition-duration: 400ms;
+}
+
+.delete-date:hover {
+    color: rgb(145, 53, 53);
 }

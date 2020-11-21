@@ -14,7 +14,7 @@
       <h1>Удалить?</h1>
       <form action="" method="post">
         {% csrf_token %}
-        <p>Удалить "{{ task }}" {{ task.date }}</p>
+        <p>Удалить {{ date }}</p>
         <input type="submit" value="Удалить" autofocus class="btn-sd"/>
       </form>
     </div>

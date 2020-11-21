@@ -16,9 +16,12 @@
   {% for element in form %}
     <p class="label">{{ element.label_tag }}</p>
     <p class="data">{{ element }}</p>
+    {% if element.label == 'Дата задания' %}
+    <a class="related-widget-wrapper-link add-related" id="add_id_date" href="/created/" title="Добавить ещё один объект типа " Дата""=""><img src="/static/admin/img/icon-addlink.svg" alt="Добавить"></a>
+    {% endif %}
     <br>
   {% endfor %}
   <input type="submit" value="Сохранить" class="btn-sd">
 </form>
 {% include 'style.html' %}
-{% endblock %}
+{% endblock %}  

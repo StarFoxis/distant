@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 
 from .models import assignment_dates, homework
 from registration.models import Style
+from .forms import TasksForm
 
 class TasksListView(ListView):
     model = assignment_dates
@@ -49,7 +50,8 @@ class TasksListView(ListView):
 
 class CreateTaskView(CreateView):
     model = homework
-    fields = ['date', 'num_task', 'text_task', 'answer_task']
+    form_class = TasksForm
+    # fields = ['date', 'num_task', 'text_task', 'answer_task']
     template_name = 'distant/create_task.html'
     success_url = 'tasks' # Паскуда
 
@@ -78,8 +80,6 @@ class CreateTaskView(CreateView):
         
         def get_success_url(self):  # Тварина. Я на тебя потратил 2 часа времени
             return reverse_lazy('tasks')
-
-
 
 class UpdateTaskView(UpdateView):
     model = homework
@@ -112,6 +112,41 @@ class DeleteTaskView(DeleteView):
     model = homework
     context_object_name = 'task'
     template_name = 'distant/delete_task.html'
+    success_url = reverse_lazy('tasks')
+
+    def get(self, request, *args, **kwargs):
+        super().get(request, *args, **kwargs)
+        if request.user.is_staff:
+            return render(request, self.template_name, self.get_context_data())
+        return redirect('/')
+
+    def post(self, request, *args, **kwargs):
+        # super().post(request, *args, **kwargs)
+        if 'admin' in request.POST:
+            try:
+                style = Style.objects.get(id=request.user.style.id) 
+                style.style = not style.style
+                style.save()
+            except:
+                Style.objects.create(user_id=request.user.id, style=True).save()
+            return redirect(request.path)
+        else:
+            return self.delete(request, *args, **kwargs)
+        return redirect('tasks')
+
+class CreateDateView(CreateView):
+    model = assignment_dates
+    fields = ['date']
+    template_name = 'distant/create_date.html'
+    success_url = 'create'
+
+    def get_success_url(self):  
+            return reverse_lazy('create')
+
+class DeleteDateView(DeleteView):
+    model = assignment_dates
+    context_object_name = 'date'
+    template_name = 'distant/delete_date.html'
     success_url = reverse_lazy('tasks')
 
     def get(self, request, *args, **kwargs):

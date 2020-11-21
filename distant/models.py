@@ -17,7 +17,7 @@ class homework(models.Model):
     num_task = models.PositiveSmallIntegerField('Номер задания')
     text_task = models.TextField('Текст задания')
     answer_task = models.TextField('Ответ')
-    date = models.ForeignKey(assignment_dates, on_delete=models.SET_NULL, null=True, verbose_name='Дата задания')
+    date = models.ForeignKey(assignment_dates, on_delete=models.CASCADE, null=True, verbose_name='Дата задания')
 
     def __str__(self):
         return 'Задание '+str(self.num_task)

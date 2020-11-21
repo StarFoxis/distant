@@ -48,9 +48,12 @@
     {% for date in dates %}
         <div>
           {% if request.GET.id == date.id|stringformat:"i" %}
-            <span class="current">{{ date }}</span>
+            <span class="current date-btn">{{ date }}</span>
           {% else %}
             <a href="?id={{ date.pk }}&page={{ dates.number  }}" class="date-btn">{{ date }}</a>
+          {% endif %}
+          {% if user.is_staff %}
+            <a href="{% url 'deleted' date.pk %}" class="delete-date"><i class="fa fa-eraser" aria-hidden="true"></i></a>
           {% endif %}
         </div>
     {% endfor %}
