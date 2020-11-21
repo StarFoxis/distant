@@ -96,8 +96,8 @@ form .image {
 }
 
 a {
-    /* padding: 5px; */
-    font-size: 18px;
+    padding: 5px;
+    /* font-size: 18px; */
     color: rgb(35, 117, 83);
     text-decoration: none;
 }
