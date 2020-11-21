@@ -61,7 +61,7 @@ body {
     left: 65%;
     width: 30%;
     font-size: 30px;
-    top: 9%;
+    top: 95px;
 }
 
 .logo {
@@ -79,24 +79,6 @@ body {
 #auth {
     display: flex;
     align-items: center;
-}
-
-nav {
-    display: flex;
-    flex: auto;
-    justify-content: space-between;
-    /* flex-direction: row-reverse; */
-}
-
-nav a {
-    margin: auto 30px;
-    text-decoration: none;
-    color: rgb(120, 24, 175);
-    font-size: 22px;
-}
-
-nav a:hover {
-    color: rgb(81, 14, 87);
 }
 
 .user {
@@ -155,7 +137,7 @@ nav a:hover {
 
 .toolbar {
     position: fixed;
-    left: calc(5% - 60px);
+    left: 38px;
     top: calc(100% - 108px);
     padding: 5px;
     border: 1px solid black;
@@ -219,6 +201,7 @@ nav a:hover {
   nav ul li {
     float: left;
     position: relative;
+    font-size: 22px;
   }
   nav ul li a,
   nav ul li a:visited {
@@ -229,6 +212,7 @@ nav a:hover {
     color: #ffffff;
     text-decoration: none;
     min-width: 190px;
+    transition-duration: 500ms;
   }
   nav ul li a:hover,
   nav ul li a:visited:hover {
