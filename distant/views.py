@@ -30,7 +30,7 @@ class TasksListView(ListView):
         if tasks:
             data['tasks'] = homework.objects.filter(date=tasks)
         else:
-            data['tasks'] = homework.objects.filter(date=1)
+            data['tasks'] = homework.objects.filter(date=assignment_dates.objects.first())
         return data
 
     def get_queryset(self):
