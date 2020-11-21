@@ -13,6 +13,7 @@
 <section class="example">
   {% if user.is_authenticated %}
   <div class="tasks">
+    <h class="date">{{ tasks.date }}</h>
     {% for task in tasks %}
         <div class="task">
           {% if user.is_staff %}
