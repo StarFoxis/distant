@@ -13,26 +13,28 @@
 <section class="example">
   {% if user.is_authenticated %}
   <div class="tasks">
-    <h class="date">{{ tasks.date }}</h>
-    {% for task in tasks %}
-        <div class="task">
-          {% if user.is_staff %}
-          <div class="edittool">
-            <a href="{% url 'update' task.pk %}"><i class="fa fa-scissors" aria-hidden="true"></i></a>
-            <a href="{% url 'delete' task.pk %}"><i class="fa fa-eraser" aria-hidden="true"></i></a>
-          </div> 
-          {% endif %} 
-          <span class="nom">Задание {{ task.num_task }}.<span>
-          <p class="text-task">
-            {{ task.text_task|linebreaksbr }}
-          </p>
-          <div class="code">
-            <pre>{{ task.answer_task }}</pre>
+    <div class="block-task">
+      <h1 class="date">{{ tasks.first.date }}</h1>
+      {% for task in tasks %}
+          <div class="task">
+            {% if user.is_staff %}
+            <div class="edittool">
+              <a href="{% url 'update' task.pk %}"><i class="fa fa-scissors" aria-hidden="true"></i></a>
+              <a href="{% url 'delete' task.pk %}"><i class="fa fa-eraser" aria-hidden="true"></i></a>
+            </div> 
+            {% endif %} 
+            <span class="nom">Задание {{ task.num_task }}.<span>
+            <p class="text-task">
+              {{ task.text_task|linebreaksbr }}
+            </p>
+            <div class="code">
+              <pre>{{ task.answer_task }}</pre>
+            </div>
           </div>
-        </div>
-    {% empty %}
-      <img src="{% static 'images/ustal.png' %}" alt="" class='no-homework'>
-    {% endfor %}
+      {% empty %}
+        <img src="{% static 'images/ustal.png' %}" alt="" class='no-homework'>
+      {% endfor %}
+    </div>
   </div>
   {% else %}
   <h1 class="warning">Чтобы увидеть решения войдите или зарегистрируйтесь</h1>
