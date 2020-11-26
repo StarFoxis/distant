@@ -1,13 +1,13 @@
 {% if user.is_authenticated %}
 <div class="style">  
-  <form action="" method="post">
+  <form action="{% url 'style' %}" method="post">
     {% csrf_token %}
-    <input type="hidden" value='{{ user }}' name="user">
-        {% if user.style.style %}
-          <button class="btn-style"><i class="fa fa-moon-o" aria-hidden="true"></i></button>
-        {% else %}
-          <button class="btn-style"><i class="fa fa-sun-o" aria-hidden="true"></i></button>
-        {% endif %}
+    <input type="hidden" value='{{ request.path }}' name="late_path">
+    {% if user.style.style %}
+      <button class="btn-style"><i class="fa fa-moon-o" aria-hidden="true"></i></button>
+    {% else %}
+      <button class="btn-style"><i class="fa fa-sun-o" aria-hidden="true"></i></button>
+    {% endif %}
   </form>
 </div>
 {% endif %}

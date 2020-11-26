@@ -11,13 +11,13 @@
 
 
 {% block content %}
-<form method="post">
+<form method="post" class="{% url 'create' %}">
   {% csrf_token %}
   {% for element in form %}
     <p class="label">{{ element.label_tag }}</p>
     <p class="data">{{ element }}</p>
     {% if element.label == 'Дата задания' %}
-    <a class="related-widget-wrapper-link add-related" id="add_id_date" href="/created/" title="Добавить ещё один объект типа " Дата""=""><img src="/static/admin/img/icon-addlink.svg" alt="Добавить"></a>
+    <a class="related-widget-wrapper-link add-related" id="add_id_date" href="{% url 'created' %}" title="Добавить ещё один объект типа " Дата""=""><img src="/static/admin/img/icon-addlink.svg" alt="Добавить"></a>
     {% endif %}
     <br>
   {% endfor %}
@@ -25,3 +25,57 @@
 </form>
 {% include 'style.html' %}
 {% endblock %}  
+
+{% block script %}
+<script>
+  function ajaxDateGET() {
+    $("#add_id_date").click((e) => {
+      e.preventDefault()
+
+      $.ajax({
+        url: "{% url 'created' %}",
+        method: 'GET',
+        success: function(data) {
+          btn_close = '<button type="submit" class="close">Close</button>'
+          $('.hero').append( $(data).find('.created').html())
+          $('.modal').append(btn_close)
+          console.log($(data))
+          $('.close').click((e) => {
+              $('.modal').remove()
+          })
+        }
+      })
+      return false
+    })
+  }
+
+  function ajaxDatePOST() {
+    $('.btn-date').click((e) => {
+      e.preventDefault()
+      $('input[name=late_path]').val("{{ request.path }}")
+
+      $.ajax({
+        url: "{% url 'created' %}",
+        method: 'POST',
+        data: $('#date').serialize(),
+        success: function(data) {
+          $('#id_date').empty()
+          $('#id_date').append( $(data).find('#id_date').html() )
+          $('.modal').remove()
+        }
+      })
+      return false
+    })
+  }
+
+  $(document).ready(function() {
+    ajaxDateGET()
+    ajaxDatePOST()
+  })
+
+  $(document).ajaxStop(function() {
+    ajaxDateGET()
+    ajaxDatePOST()
+  })
+</script>
+{% endblock %}

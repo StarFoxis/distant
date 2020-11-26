@@ -125,8 +125,9 @@
 		</div>
 	</footer>
 	<script src="{% static 'js/jquery.js' %}"></script>
-	{% if user.style.style %} <!-- Скрипт для выпадающего меню -->
+	{% if user.style.style %} 
 		<script>
+			// <!-- Скрипт для выпадающего меню -->
 			(function($) { 
 				$(function() { 
 					$('nav ul li a:not(:only-child)').click(function(e) {
@@ -153,7 +154,7 @@
 	{% else %}
 	<!-- Если нужно вставь свой скрипт -->
 	{% endif %}
-	{% block sctipt %}
+	{% block script %}
 	{% endblock %}
 </body>
 </html>

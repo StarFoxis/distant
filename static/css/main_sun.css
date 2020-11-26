@@ -263,12 +263,45 @@ pre {
 
 
 
-.delete-date {
+.btn-delete-date {
     margin-left: 20px;
     color: darkred;
     transition-duration: 400ms;
 }
 
-.delete-date:hover {
+.btn-delete-date:hover {
     color: rgb(145, 53, 53);
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-date {
+    display: inline-block;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    background: white;
+}
+
+.close {
+    font-size: 19px;
+    transition-duration: 500ms;
+    border: none;
+}
+
+.close:hover {
+    transition-duration: 500ms;
+    background-color: rgba(200, 200, 200, 0.9);
 }

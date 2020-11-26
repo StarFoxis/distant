@@ -12,18 +12,23 @@
 
 {% block content %}
 <div class="created">
-    <div class="errors">
+  <div class="modal">
+    <div class="form-date">
+      <div class="errors">
         {{ form.date.errors }}
-    </div>
-    <form method="post">
+      </div>
+      <form action="{% url 'created' %}" method="post" id="date">
+        <input type="hidden" name='late_path' value={{ request.path }}>
         {% csrf_token %}
         {% for element in form %}
             <p class="label">{{ element.label_tag }}</p>
             <p class="data">{{ element }}</p>
         {% endfor %}
         <br>
-        <input type="submit" value="Сохранить" class="btn-sd">
-    </form>
+        <input type="submit" value="Сохранить" class="btn-sd btn-date">
+      </form>
+    </div>
+  </div>
 </div>
 {% include 'style.html' %}
 {% endblock %}

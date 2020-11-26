@@ -1,28 +1,20 @@
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy 
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from .models import assignment_dates, homework
-from registration.models import Style
 from .forms import TasksForm
 
 class TasksListView(ListView):
     model = assignment_dates
     context_object_name = 'dates'
     template_name = 'distant/tasks_list.html'
-
-    def post(self, request, *args, **kwargs):
-        try:
-            style = Style.objects.get(id=request.user.style.id) 
-            style.style = not style.style
-            style.save()
-        except:
-            Style.objects.create(user_id=request.user.id, style=True).save()
-        return redirect(request.path)
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -53,7 +45,7 @@ class CreateTaskView(CreateView):
     form_class = TasksForm
     # fields = ['date', 'num_task', 'text_task', 'answer_task']
     template_name = 'distant/create_task.html'
-    success_url = 'tasks' # Паскуда
+    # success_url = 'tasks' # Паскуда
 
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
@@ -61,25 +53,13 @@ class CreateTaskView(CreateView):
             return render(request, self.template_name, self.get_context_data())
         return redirect('/')
 
-    def post(self, request, *args, **kwargs):
-        super().post(request, *args, **kwargs)
-        if 'user' in request.POST:
-            try:
-                style = Style.objects.get(id=request.user.style.id) 
-                style.style = not style.style
-                style.save()
-            except:
-                Style.objects.create(user_id=request.user.id, style=True).save()
-            return redirect(request.path)
-        return redirect('tasks')
-
-        def form_valid(self, form):
-            homework.objects.create(**form.cleaned_data)
-            suc = self.get_success_url()
-            return redirect(suc)
-        
-        def get_success_url(self):  # Тварина. Я на тебя потратил 2 часа времени
-            return reverse_lazy('tasks')
+    def form_valid(self, form):
+        homework.objects.create(**form.cleaned_data)
+        suc = self.get_success_url()
+        return redirect(suc)
+    
+    def get_success_url(self):  # Тварина. Я на тебя потратил 2 часа времени
+        return reverse_lazy('tasks')
 
 class UpdateTaskView(UpdateView):
     model = homework
@@ -96,18 +76,6 @@ class UpdateTaskView(UpdateView):
             return render(request, self.template_name, self.get_context_data())
         return redirect('/')
 
-    def post(self, request, *args, **kwargs):
-        super().post(request, *args, **kwargs)
-        if 'admin' in request.POST:
-            try:
-                style = Style.objects.get(id=request.user.style.id) 
-                style.style = not style.style
-                style.save()
-            except:
-                Style.objects.create(user_id=request.user.id, style=True).save()
-            return redirect(request.path)
-        return redirect('tasks')
-
 class DeleteTaskView(DeleteView):
     model = homework
     context_object_name = 'task'
@@ -119,20 +87,6 @@ class DeleteTaskView(DeleteView):
         if request.user.is_staff:
             return render(request, self.template_name, self.get_context_data())
         return redirect('/')
-
-    def post(self, request, *args, **kwargs):
-        # super().post(request, *args, **kwargs)
-        if 'admin' in request.POST:
-            try:
-                style = Style.objects.get(id=request.user.style.id) 
-                style.style = not style.style
-                style.save()
-            except:
-                Style.objects.create(user_id=request.user.id, style=True).save()
-            return redirect(request.path)
-        else:
-            return self.delete(request, *args, **kwargs)
-        return redirect('tasks')
 
 class CreateDateView(CreateView):
     model = assignment_dates
@@ -154,20 +108,6 @@ class DeleteDateView(DeleteView):
         if request.user.is_staff:
             return render(request, self.template_name, self.get_context_data())
         return redirect('/')
-
-    def post(self, request, *args, **kwargs):
-        # super().post(request, *args, **kwargs)
-        if 'admin' in request.POST:
-            try:
-                style = Style.objects.get(id=request.user.style.id) 
-                style.style = not style.style
-                style.save()
-            except:
-                Style.objects.create(user_id=request.user.id, style=True).save()
-            return redirect(request.path)
-        else:
-            return self.delete(request, *args, **kwargs)
-        return redirect('tasks')
 
 def get_info(request):
     if request.method == 'POST':

@@ -137,7 +137,7 @@ body {
 
 .toolbar {
     position: fixed;
-    left: 38px;
+    left: 20px;
     top: calc(100% - 108px);
     padding: 5px;
     border: 1px solid black;

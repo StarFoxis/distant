@@ -20,7 +20,7 @@
             {% if user.is_staff %}
             <div class="edittool">
               <a href="{% url 'update' task.pk %}"><i class="fa fa-scissors" aria-hidden="true"></i></a>
-              <a href="{% url 'delete' task.pk %}"><i class="fa fa-eraser" aria-hidden="true"></i></a>
+              <a href="{% url 'delete' task.pk %}" value='{{ task }}' class="btn-delete-task"><i class="fa fa-eraser" aria-hidden="true"></i></a>
             </div> 
             {% endif %} 
             <span class="nom">Задание {{ task.num_task }}.<span>
@@ -45,7 +45,8 @@
 {% endif %}
 </section>
 <section class="date-example">
-    {% for date in dates %}
+    <div class="dates">
+      {% for date in dates %}
         <div>
           {% if request.GET.id == date.id|stringformat:"i" %}
             <span class="current date-btn">{{ date }}</span>
@@ -53,29 +54,140 @@
             <a href="?id={{ date.pk }}&page={{ dates.number  }}" class="date-btn">{{ date }}</a>
           {% endif %}
           {% if user.is_staff %}
-            <a href="{% url 'deleted' date.pk %}" class="delete-date"><i class="fa fa-eraser" aria-hidden="true"></i></a>
+            <a href="{% url 'deleted' date.pk %}" class="btn-delete-date" value='{{ date }}'><i class="fa fa-eraser" aria-hidden="true"></i></a>
           {% endif %}
         </div>
-    {% endfor %}
-    <div class="pagination">
+      {% endfor %}
+    </div>
+    
+    <div class="pagination" id="pagination">
       {% if dates.has_previous %}
-          <a href="?id={{ request.GET.id }}&page={{ dates.previous_page_number }}" class="array"><i class="fa fa-caret-square-o-left" aria-hidden="true"></i></a>
+          <a href="?id={{ request.GET.id }}&page={{ dates.previous_page_number }}" class="array" id="page-link"><i class="fa fa-caret-square-o-left" aria-hidden="true"></i></a>
       {% endif %}
   
       {% for num in dates.paginator.page_range %}
           {% if num == dates.number %}
               <span class="choice"><b>{{ num }}</b></span>
           {% else %}
-              <a href="?id={{ request.GET.id }}&page={{ num }}"> {{ num }}</a>
+              <a href="?id={{ request.GET.id }}&page={{ num }}" id="page-link"> {{ num }}</a>
           {% endif %} 
       {% endfor %}
   
       {% if dates.has_next %}
-          <a href="?id={{ request.GET.id }}&page={{ dates.next_page_number }}" class="array"><i class="fa fa-caret-square-o-right" aria-hidden="true"></i></a>
+          <a href="?id={{ request.GET.id }}&page={{ dates.next_page_number }}" class="array" id="page-link"><i class="fa fa-caret-square-o-right" aria-hidden="true"></i></a>
       {% endif %}
   
   </div>
 </section>
 
 {% include 'style.html' %}
+{% endblock %}
+
+{% block script %}
+<script>
+  function ajaxPagination() {
+    $('#pagination a#page-link').each((index, el) => {
+      $(el).click((e) => {
+        e.preventDefault()
+        let page_url = $(el).attr('href')
+        console.log(page_url)
+
+        $.ajax({
+          url: page_url,
+          type: 'GET',
+          success: (data) => {
+            $('.date-example').empty()
+            $('.date-example').append( $(data).find('.date-example').html() )
+          }
+        })
+      })
+    })
+  }
+
+  function ajaxTasks() {
+    $('.dates a.date-btn').each((index, el) => {
+      $(el).click((e) => {
+        e.preventDefault()
+        let page_url = $(el).attr('href')
+        console.log(page_url)
+
+        $.ajax({
+          url: page_url,
+          type: 'GET',
+          success: (data) => {
+            $('.date-example').empty()
+            $('.date-example').append( $(data).find('.date-example').html() )
+
+            $('.example').empty()
+            $('.example').append( $(data).find('.example').html() )
+          }
+        })
+      })
+    })
+  }
+
+  function deleteDatePOST() {
+    $('.btn-delete-date').each((index, el) => {
+      $(el).click((e) => {
+        let page_url = $(el).attr('href')
+        e.preventDefault()
+
+        let del = confirm(`Delete ${$(el).attr('value')}?`)
+        if (del) {
+          $.ajax({
+              url: page_url,
+              method: 'POST',
+              data: {csrfmiddlewaretoken: "{{ csrf_token }}"},
+              success: function(data) {
+                $('main').empty()
+                $('main').append( $(data).filter('main').html() )
+              }
+          })
+        } else {
+            alert('Bruh')
+        }   
+      })       
+    })
+  }
+
+  function deleteTaskPOST() {
+    $('.btn-delete-task').each((index, el) => {
+      $(el).click((e) => {
+        let page_url = $(el).attr('href')
+        e.preventDefault()
+
+        let del = confirm(`Delete ${$(el).attr('value')}?`)
+        if (del) {
+          $.ajax({
+              url: page_url,
+              method: 'POST',
+              data: {csrfmiddlewaretoken: "{{ csrf_token }}"},
+              success: function(data) {
+                $('main').empty()
+                $('main').append( $(data).filter('main').html() )
+              }
+          })
+        } else {
+            alert('Bruh')
+        }   
+      })       
+    })
+  }
+
+  $(document).ready(function() {
+    ajaxPagination()
+    ajaxTasks()
+    deleteDatePOST()
+    deleteTaskPOST()
+  })
+
+  $(document).ajaxStop(function() {
+    ajaxPagination()
+    ajaxTasks()
+    deleteDatePOST()
+    deleteTaskPOST()
+  })
+</script>
+
+
 {% endblock %}

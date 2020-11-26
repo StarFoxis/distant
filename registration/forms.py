@@ -13,7 +13,7 @@ class SignupForm(forms.Form):
         user.save()
 
 class UserEditForm(forms.ModelForm):
-    first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'my-input'}), required=False)
+    first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'my-input'}), required=True)
     last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={'class': 'my-input'}), required=False)
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'my-input'}), required=False)
 
