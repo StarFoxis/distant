@@ -11,9 +11,6 @@ body {
 nav {
     display: flex;
     justify-content: space-between;
-    background-color: #fff;
-    padding-left: 30px;
-    padding-right: 30px;
 }
 
 a {
@@ -98,8 +95,8 @@ footer {
 }
 
 .btnanim:hover {
-    transition: 0.5s
-    background-color: white;
+    transition: 0.5s;
+    background-color: while;
     color: black;
 }
 
@@ -111,40 +108,42 @@ pre {
     user-select: all;
 }
 
-// Extra small devices (portrait phones, less than 576px)
+/* // Extra small devices (portrait phones, less than 576px) */
 @media screen (max-width: 575.98px) {
     .container {
         display: none;
     }
 }
 
-// Small devices (landscape phones, 576px and up)
+/* // Small devices (landscape phones, 576px and up) */
 @media screen (min-width: 576px) and (max-width: 767.98px) {
     .container {
         width: 540px;
     }
 }
 
-// Medium devices (tablets, 768px and up)
+/* // Medium devices (tablets, 768px and up) */
 @media screen (min-width: 768px) and (max-width: 991.98px) {
     .container {
         width: 720px;
     }
 }
 
-// Large devices (desktops, 992px and up)
+/* // Large devices (desktops, 992px and up) */
 @media screen (min-width: 992px) and (max-width: 1199.98px) {
     .container {
         width: 960px;
     }
 }
 
-// Extra large devices (large desktops, 1200px and up)
+/* // Extra large devices (large desktops, 1200px and up) */
 @media screen (min-width: 1200px) {
     .container {
         width: 1140px;
     }
 }
+
+/* Вставил свой код, измени если не подходит */
 
 .btn-style {
     width: 70px;
@@ -161,4 +160,184 @@ pre {
 
 .btn-style:hover {
     color: gray;
+}
+
+.navigation {
+    width: 100%;
+    height: 70px;
+    background: #262626;
+  }
+  
+  .brand {
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    margin-left: 35px;
+  }
+  .brand a,
+  .brand a:visited {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .nav-container {
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+  
+  nav {
+    float: right;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul li {
+    float: left;
+    position: relative;
+    font-size: 22px;
+  }
+  nav ul li a,
+  nav ul li a:visited {
+    display: block;
+    padding: 0 20px;
+    line-height: 70px;
+    background: #262626;
+    color: #ffffff;
+    text-decoration: none;
+    min-width: 230px;
+    transition-duration: 500ms;
+  }
+  nav ul li a:hover,
+  nav ul li a:visited:hover {
+    background: #2581DC;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  nav ul li a:not(:only-child):after,
+  nav ul li a:visited:not(:only-child):after {
+    padding-left: 4px;
+    content: ' ▾';
+  }
+  nav ul li ul li {
+    min-width: 190px;
+  }
+  nav ul li ul li a {
+    padding: 15px;
+    line-height: 20px;
+  }
+  
+  .nav-dropdown {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    /* box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15); */
+  }
+  
+  .nav-dropdown li {
+      width: 100%;
+  }
+  
+  /* Mobile navigation */
+  .nav-mobile {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    background: #262626;
+    height: 70px;
+    width: 70px;
+  }
+  
+  @media only screen and (max-width: 900px) {
+    .nav-mobile {
+      display: block;
+    }
+  
+    nav {
+        position: absolute;
+        padding: 70px 0;
+        right: 0;
+        top: 0;
+    }
+    nav ul {
+      display: none;
+    }
+    nav ul li {
+      float: none;
+    }
+    nav ul li a {
+      padding: 15px;
+      line-height: 20px;
+    }
+    nav ul li ul li a {
+      padding-left: 30px;
+    }
+  
+    .nav-dropdown {
+      position: static;
+    }
+  }
+  @media screen and (min-width: 900px) {
+    .nav-list {
+      display: block!important;
+    }
+      
+      .nav-list li:hover .nav-dropdown {
+            display: block!important;
+      }
+  }
+  #nav-toggle {
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    cursor: pointer;
+    padding: 10px 35px 16px 0px;
+  }
+  #nav-toggle span,
+  #nav-toggle span:before,
+  #nav-toggle span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: #ffffff;
+    position: absolute;
+    display: block;
+    content: '';
+    transition: all 300ms ease-in-out;
+  }
+  #nav-toggle span:before {
+    top: -10px;
+  }
+  #nav-toggle span:after {
+    bottom: -10px;
+  }
+  #nav-toggle.active span {
+    background-color: transparent;
+  }
+  #nav-toggle.active span:before, #nav-toggle.active span:after {
+    top: 0;
+  }
+  #nav-toggle.active span:before {
+    transform: rotate(45deg);
+  }
+  #nav-toggle.active span:after {
+    transform: rotate(-45deg);
+  }
+
+.name {
+    vertical-align: super;
+    margin-left: 10px;
+}
+
+.nav-dropdown p {
+    display: inline;
+}
+
+.user-image {
+    width: 35px;
 }

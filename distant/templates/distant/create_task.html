@@ -11,7 +11,7 @@
 
 
 {% block content %}
-<form method="post" class="{% url 'create' %}">
+<form method="post">
   {% csrf_token %}
   {% for element in form %}
     <p class="label">{{ element.label_tag }}</p>
@@ -28,39 +28,45 @@
 
 {% block script %}
 <script>
-  function ajaxDateGET() {
-    $("#add_id_date").click((e) => {
-      e.preventDefault()
-
-      $.ajax({
-        url: "{% url 'created' %}",
-        method: 'GET',
-        success: function(data) {
-          btn_close = '<button type="submit" class="close">Close</button>'
-          $('.hero').append( $(data).find('.created').html())
-          $('.modal').append(btn_close)
-          console.log($(data))
-          $('.close').click((e) => {
-              $('.modal').remove()
-          })
-        }
-      })
-      return false
+  $('#add_id_date').on('click', (e) => {
+    e.preventDefault()
+    $.ajax({
+      url: "{% url 'created' %}",
+      method: 'GET',
+      success: function(data) {
+        btn_close = '<button type="submit" class="close">Close</button>'
+        $('.hero').append( $(data).find('.created').html())
+        $('.form-date').append(btn_close)
+        $(document).click((e) => {
+          if ($(e.target).is('.close') ||
+              !$('.form-date').is(e.target) &&
+              $('.form-date').has(e.target).length === 0)
+            $('.modal').remove()
+        })
+        $(document).keyup((e) => {
+          if (e.key === 'Escape')
+            $('.modal').remove()
+          
+        })
+      }
     })
-  }
+  })
 
   function ajaxDatePOST() {
     $('.btn-date').click((e) => {
       e.preventDefault()
       $('input[name=late_path]').val("{{ request.path }}")
-
       $.ajax({
         url: "{% url 'created' %}",
         method: 'POST',
         data: $('#date').serialize(),
         success: function(data) {
-          $('#id_date').empty()
-          $('#id_date').append( $(data).find('#id_date').html() )
+          if ( $(data).find('#id_date').html() ) {
+            $('#id_date').empty()
+            $('#id_date').append( $(data).find('#id_date').html() )
+          } else {
+            alert('Не правильный формат даты!')
+          }
           $('.modal').remove()
         }
       })
@@ -69,12 +75,10 @@
   }
 
   $(document).ready(function() {
-    ajaxDateGET()
     ajaxDatePOST()
   })
 
   $(document).ajaxStop(function() {
-    ajaxDateGET()
     ajaxDatePOST()
   })
 </script>

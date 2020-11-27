@@ -45,7 +45,7 @@ class CreateTaskView(CreateView):
     form_class = TasksForm
     # fields = ['date', 'num_task', 'text_task', 'answer_task']
     template_name = 'distant/create_task.html'
-    # success_url = 'tasks' # Паскуда
+    success_url = 'tasks' # Паскуда
 
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
@@ -53,13 +53,13 @@ class CreateTaskView(CreateView):
             return render(request, self.template_name, self.get_context_data())
         return redirect('/')
 
-    def form_valid(self, form):
-        homework.objects.create(**form.cleaned_data)
-        suc = self.get_success_url()
-        return redirect(suc)
-    
-    def get_success_url(self):  # Тварина. Я на тебя потратил 2 часа времени
-        return reverse_lazy('tasks')
+        def form_valid(self, form):
+            homework.objects.create(**form.cleaned_data)
+            suc = self.get_success_url()
+            return redirect(suc)
+        
+        def get_success_url(self):  # Тварина. Я на тебя потратил 2 часа времени
+            return reverse_lazy('tasks')
 
 class UpdateTaskView(UpdateView):
     model = homework
@@ -93,6 +93,11 @@ class CreateDateView(CreateView):
     fields = ['date']
     template_name = 'distant/create_date.html'
     success_url = 'create'
+
+    def post(self, request, *argv, **kwargs):
+        response = super().post(request, *argv, **kwargs)
+        print(request.POST)
+        return response
 
     def get_success_url(self):  
             return reverse_lazy('create')

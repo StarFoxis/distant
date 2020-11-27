@@ -299,9 +299,11 @@ pre {
     font-size: 19px;
     transition-duration: 500ms;
     border: none;
+    margin: 15px;
+    padding: 5px;
 }
 
 .close:hover {
     transition-duration: 500ms;
-    background-color: rgba(200, 200, 200, 0.9);
+    background-color: rgba(165, 175, 160, 0.9);
 }

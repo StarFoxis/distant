@@ -45,7 +45,7 @@
 {% endif %}
 </section>
 <section class="date-example">
-    <div class="dates">
+    <div id="dates">
       {% for date in dates %}
         <div>
           {% if request.GET.id == date.id|stringformat:"i" %}
@@ -105,7 +105,7 @@
   }
 
   function ajaxTasks() {
-    $('.dates a.date-btn').each((index, el) => {
+    $('#dates a.date-btn').each((index, el) => {
       $(el).click((e) => {
         e.preventDefault()
         let page_url = $(el).attr('href')
@@ -115,11 +115,8 @@
           url: page_url,
           type: 'GET',
           success: (data) => {
-            $('.date-example').empty()
-            $('.date-example').append( $(data).find('.date-example').html() )
-
-            $('.example').empty()
-            $('.example').append( $(data).find('.example').html() )
+            $('main').empty()
+            $('main').append( $(data).filter('main').html() )
           }
         })
       })
